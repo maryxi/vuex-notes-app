@@ -75,12 +75,23 @@
         },
         computed: {
             newNotes () {
+                // let localStorage = window.localStorage
+                // let localNotes = localStorage.getItem('notes')
+                // console.log(localNotes)
+                // if(localNotes) {
+                //     localNotes = JSON.parse(localNotes)
+                //     if(this.show === 'all') {
+                //         return localNotes
+                //     } else if(this.show === 'fav') {
+                //         return localNotes.filter(note => note.fav)
+                //     }
+                // } else {
                 if(this.show === 'all') {
                     return this.notes
                 } else if(this.show === 'fav') {
                     return this.notes.filter(note => note.fav)
                 }
-
+                // }
             }
         }
     }

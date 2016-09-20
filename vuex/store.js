@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import middlewares from './middlewares'
 
 Vue.use(Vuex)
 const state = {
@@ -7,8 +8,36 @@ const state = {
     activeNote: {}
 }
 
+const setStorage = {
+    // onInit (state) {
+    //     // let localStorage = window.localStorage
+    //     let localNotes = window.localStorage.getItem('notes')
+    //     console.log(localNotes)
+    //     state.notes = localNotes
+    // },
+    onMutation (mutation, state) {
+        let localStorage = window.localStorage
+        localStorage.setItem('notes', JSON.stringify(state.notes))
+    }
+}
+
+// const getStorage = {
+//     onMutation (mutation, state) {
+//         
+//         if(localNotes) {
+//             state.notes.push(localNotes)
+//             console.log(state.notes)
+//         }
+//     }
+// }
+// const getStorage = {
+//     onMutation (mutations, state) {
+//         let localStorage = window.localStorage
+//         localStorage.getItem('notes')
+//     }
+// }
 const mutations = {
-    ADD_NOTE (state) {
+    ADD_NOTE (state, localNotes) {
         const newNote = {
             text: 'this is a newNote',
             fav: false
@@ -33,5 +62,6 @@ const mutations = {
 
 export default new Vuex.Store({
     state,
-    mutations
+    mutations,
+    middlewares: [setStorage]
 })
